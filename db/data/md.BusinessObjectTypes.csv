@@ -1,0 +1,7 @@
+ID,ClientId,Name,Description
+dc34c712-a906-4347-b23b-a88fea1fab8a,76785e66-3032-4a27-b53f-4373dd135ce0,Shipment,LBN Shipment
+eaf815c8-eddf-421b-9e99-9b289629ec6f,76785e66-3032-4a27-b53f-4373dd135ce0,Work Order,AIN Work Order
+cfa87170-0932-4e49-a355-e42a6339d8ce,76785e66-3032-4a27-b53f-4373dd135ce0,Notification,S4 Notification
+6385a775-e8ef-4289-8464-877f593c79f0,76785e66-3032-4a27-b53f-4373dd135ce0,Equipment,AIN Equipment
+478e6ced-5756-44de-ad33-e3edf1db22e4,76785e66-3032-4a27-b53f-4373dd135ce0,Truck Location,Truck Location
+df90f76a-91c2-11eb-a8b3-0242ac130003,76785e66-3032-4a27-b53f-4373dd135ce0,Global,Global

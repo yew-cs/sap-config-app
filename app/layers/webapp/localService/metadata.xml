@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="SapNetworkGeoConfig" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="ActionTypes" EntityType="SapNetworkGeoConfig.ActionTypes">
+                    <NavigationPropertyBinding Path="texts" Target="ActionTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="ActionTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="ActionTypes_texts" EntityType="SapNetworkGeoConfig.ActionTypes_texts"/>
+                <EntitySet Name="Actions" EntityType="SapNetworkGeoConfig.Actions">
+                    <NavigationPropertyBinding Path="ActionType" Target="ActionTypes"/>
+                    <NavigationPropertyBinding Path="SemanticObject" Target="BusinessObjectTypes"/>
+                    <NavigationPropertyBinding Path="texts" Target="Actions_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Actions_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Actions"/>
+                </EntitySet>
+                <EntitySet Name="Actions_in_Scenarios" EntityType="SapNetworkGeoConfig.Actions_in_Scenarios">
+                    <NavigationPropertyBinding Path="Scenario" Target="Scenarios"/>
+                    <NavigationPropertyBinding Path="Action" Target="Actions"/>
+                </EntitySet>
+                <EntitySet Name="Actions_texts" EntityType="SapNetworkGeoConfig.Actions_texts"/>
+                <EntitySet Name="BusinessObjectTypes" EntityType="SapNetworkGeoConfig.BusinessObjectTypes">
+                    <NavigationPropertyBinding Path="texts" Target="BusinessObjectTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="BusinessObjectTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="BusinessObjectTypes_texts" EntityType="SapNetworkGeoConfig.BusinessObjectTypes_texts"/>
+                <EntitySet Name="BusinessObjects_in_Scenarios" EntityType="SapNetworkGeoConfig.BusinessObjects_in_Scenarios">
+                    <NavigationPropertyBinding Path="Scenario" Target="Scenarios"/>
+                    <NavigationPropertyBinding Path="BusinessObject" Target="BusinessObjectTypes"/>
+                </EntitySet>
+                <EntitySet Name="LayerTypes" EntityType="SapNetworkGeoConfig.LayerTypes">
+                    <NavigationPropertyBinding Path="ToLayers" Target="Layers"/>
+                    <NavigationPropertyBinding Path="texts" Target="LayerTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="LayerTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="LayerTypes_texts" EntityType="SapNetworkGeoConfig.LayerTypes_texts"/>
+                <EntitySet Name="Layers" EntityType="SapNetworkGeoConfig.Layers">
+                    <NavigationPropertyBinding Path="ServiceType" Target="ServiceTypes"/>
+                    <NavigationPropertyBinding Path="LayerType" Target="LayerTypes"/>
+                    <NavigationPropertyBinding Path="texts" Target="Layers_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Layers_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Layers"/>
+                </EntitySet>
+                <EntitySet Name="Layers_in_Scenarios" EntityType="SapNetworkGeoConfig.Layers_in_Scenarios">
+                    <NavigationPropertyBinding Path="Scenario" Target="Scenarios"/>
+                    <NavigationPropertyBinding Path="Layer" Target="Layers"/>
+                </EntitySet>
+                <EntitySet Name="Layers_texts" EntityType="SapNetworkGeoConfig.Layers_texts"/>
+                <EntitySet Name="Renderers" EntityType="SapNetworkGeoConfig.Renderers">
+                    <NavigationPropertyBinding Path="texts" Target="Renderers_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Renderers_texts"/>
+                </EntitySet>
+                <EntitySet Name="Renderers_texts" EntityType="SapNetworkGeoConfig.Renderers_texts"/>
+                <EntitySet Name="Scenarios" EntityType="SapNetworkGeoConfig.Scenarios">
+                    <NavigationPropertyBinding Path="Renderer" Target="Renderers"/>
+                    <NavigationPropertyBinding Path="BusinessObjects" Target="BusinessObjects_in_Scenarios"/>
+                    <NavigationPropertyBinding Path="Layers" Target="Layers_in_Scenarios"/>
+                    <NavigationPropertyBinding Path="Actions" Target="Actions_in_Scenarios"/>
+                    <NavigationPropertyBinding Path="texts" Target="Scenarios_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Scenarios_texts"/>
+                </EntitySet>
+                <EntitySet Name="Scenarios_texts" EntityType="SapNetworkGeoConfig.Scenarios_texts"/>
+                <EntitySet Name="ServiceTypes" EntityType="SapNetworkGeoConfig.ServiceTypes">
+                    <NavigationPropertyBinding Path="ToLayers" Target="Layers"/>
+                    <NavigationPropertyBinding Path="texts" Target="ServiceTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="ServiceTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="ServiceTypes_texts" EntityType="SapNetworkGeoConfig.ServiceTypes_texts"/>
+                <FunctionImport Name="get" Function="SapNetworkGeoConfig.get"/>
+            </EntityContainer>
+            <EntityType Name="ActionTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.ActionTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.ActionTypes_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ActionTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Actions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="ActionType" Type="SapNetworkGeoConfig.ActionTypes">
+                    <ReferentialConstraint Property="ActionType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="SemanticObject" Type="SapNetworkGeoConfig.BusinessObjectTypes">
+                    <ReferentialConstraint Property="SemanticObject_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Action" Type="Edm.String"/>
+                <Property Name="Url" Type="Edm.String"/>
+                <Property Name="Parameters" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.Actions_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.Actions_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ActionType_ID" Type="Edm.Int32"/>
+                <Property Name="SemanticObject_ID" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="SapNetworkGeoConfig.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="SapNetworkGeoConfig.Actions"/>
+            </EntityType>
+            <EntityType Name="Actions_in_Scenarios">
+                <NavigationProperty Name="Scenario" Type="SapNetworkGeoConfig.Scenarios" Partner="Actions">
+                    <ReferentialConstraint Property="Scenario_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Action" Type="SapNetworkGeoConfig.Actions">
+                    <ReferentialConstraint Property="Action_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Scenario_ID" Type="Edm.Guid"/>
+                <Property Name="Action_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Actions_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="BusinessObjectTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.BusinessObjectTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.BusinessObjectTypes_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="BusinessObjectTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="BusinessObjects_in_Scenarios">
+                <NavigationProperty Name="Scenario" Type="SapNetworkGeoConfig.Scenarios" Partner="BusinessObjects">
+                    <ReferentialConstraint Property="Scenario_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="BusinessObject" Type="SapNetworkGeoConfig.BusinessObjectTypes">
+                    <ReferentialConstraint Property="BusinessObject_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Scenario_ID" Type="Edm.Guid"/>
+                <Property Name="BusinessObject_ID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="LayerTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="ToLayers" Type="Collection(SapNetworkGeoConfig.Layers)" Partner="LayerType"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.LayerTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.LayerTypes_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="LayerTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Layers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="ServiceType" Type="SapNetworkGeoConfig.ServiceTypes" Partner="ToLayers">
+                    <ReferentialConstraint Property="ServiceType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ServiceUrl" Type="Edm.String"/>
+                <Property Name="OdataFieldNameGeometry" Type="Edm.String"/>
+                <Property Name="OdataFieldNameProperties" Type="Edm.String"/>
+                <NavigationProperty Name="LayerType" Type="SapNetworkGeoConfig.LayerTypes" Partner="ToLayers">
+                    <ReferentialConstraint Property="LayerType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="MinZoom" Type="Edm.Int32"/>
+                <Property Name="LayoutJson" Type="Edm.String"/>
+                <Property Name="PaintJson" Type="Edm.String"/>
+                <Property Name="MarkerUrl" Type="Edm.String"/>
+                <Property Name="MarkerFallback" Type="Edm.String"/>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.Layers_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.Layers_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ServiceType_ID" Type="Edm.Int32"/>
+                <Property Name="LayerType_ID" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="SapNetworkGeoConfig.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="SapNetworkGeoConfig.Layers"/>
+            </EntityType>
+            <EntityType Name="Layers_in_Scenarios">
+                <NavigationProperty Name="Scenario" Type="SapNetworkGeoConfig.Scenarios" Partner="Layers">
+                    <ReferentialConstraint Property="Scenario_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Layer" Type="SapNetworkGeoConfig.Layers">
+                    <ReferentialConstraint Property="Layer_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Scenario_ID" Type="Edm.Guid"/>
+                <Property Name="Layer_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Layers_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Renderers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <Property Name="License" Type="Edm.String"/>
+                <Property Name="LicenseToken" Type="Edm.String"/>
+                <Property Name="CloudFoundryDestination" Type="Edm.String"/>
+                <Property Name="Url" Type="Edm.String"/>
+                <Property Name="DefaultCenterLatitude" Type="Edm.Double"/>
+                <Property Name="DefaultCenterLongitude" Type="Edm.Double"/>
+                <Property Name="DefaultZoomLevel" Type="Edm.Int32"/>
+                <Property Name="JsonString" Type="Edm.String"/>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.Renderers_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.Renderers_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Renderers_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Scenarios">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="Renderer" Type="SapNetworkGeoConfig.Renderers">
+                    <ReferentialConstraint Property="Renderer_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="BusinessObjects" Type="Collection(SapNetworkGeoConfig.BusinessObjects_in_Scenarios)" Partner="Scenario">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Layers" Type="Collection(SapNetworkGeoConfig.Layers_in_Scenarios)" Partner="Scenario">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Actions" Type="Collection(SapNetworkGeoConfig.Actions_in_Scenarios)" Partner="Scenario">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.Scenarios_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.Scenarios_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Renderer_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Scenarios_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ServiceTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="ToLayers" Type="Collection(SapNetworkGeoConfig.Layers)" Partner="ServiceType"/>
+                <NavigationProperty Name="texts" Type="Collection(SapNetworkGeoConfig.ServiceTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="SapNetworkGeoConfig.ServiceTypes_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ServiceTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="SapNetworkGeoConfig.Actions"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="SapNetworkGeoConfig.Actions"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="SapNetworkGeoConfig.Layers"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="SapNetworkGeoConfig.Layers"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="SapNetworkGeoConfig.Actions"/>
+                <ReturnType Type="SapNetworkGeoConfig.Actions"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="SapNetworkGeoConfig.Layers"/>
+                <ReturnType Type="SapNetworkGeoConfig.Layers"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="SapNetworkGeoConfig.Actions"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="SapNetworkGeoConfig.Actions"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="SapNetworkGeoConfig.Layers"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="SapNetworkGeoConfig.Layers"/>
+            </Action>
+            <Function Name="get" IsBound="false" IsComposable="false">
+                <Parameter Name="clientId" Type="Edm.String"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Annotations Target="SapNetworkGeoConfig.ActionTypes/ID">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.ActionTypes/Name">
+                <Annotation Term="Common.Label" String="Action Type"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions">
+                <Annotation Term="Common.Label" String="Action"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                            <PropertyValue Property="Label" String="General Information"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ActionType_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="SemanticObject_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Action"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="Url"/>
+                                    <PropertyValue Property="Url" Path="Url"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Parameters"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Action"/>
+                        <PropertyValue Property="TypeNamePlural" String="Actions"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ActionType/Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SemanticObject/Name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                        <PropertyPath>ActionType_ID</PropertyPath>
+                        <PropertyPath>SemanticObject_ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.EntityContainer/Actions">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="SapNetworkGeoConfig.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="SapNetworkGeoConfig.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="SapNetworkGeoConfig.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/ActionType">
+                <Annotation Term="Common.Label" String="Action Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/SemanticObject">
+                <Annotation Term="Common.Label" String="Semantic Object"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/Action">
+                <Annotation Term="Common.Label" String="Action"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/Url">
+                <Annotation Term="Common.Label" String="URL"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/Parameters">
+                <Annotation Term="Common.Label" String="Parameters"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/ActionType_ID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Action Type"/>
+                <Annotation Term="Common.Text" Path="ActionType/Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="ActionTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ActionType_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/SemanticObject_ID">
+                <Annotation Term="Common.Label" String="Semantic Object"/>
+                <Annotation Term="Common.Text" Path="SemanticObject/Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="BusinessObjectTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="SemanticObject_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Actions_texts/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.BusinessObjectTypes">
+                <Annotation Term="Common.Label" String="Business Object Type"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection/>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="businessObjectType"/>
+                        <PropertyValue Property="TypeNamePlural" String="businessObjectTypes"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.BusinessObjectTypes/ID">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.BusinessObjectTypes/Name">
+                <Annotation Term="Common.Label" String="Semantic Object"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.BusinessObjectTypes/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/DraftUUID">
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/CreationDateTime">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/CreatedByUser">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/DraftIsCreatedByMe">
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/LastChangeDateTime">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/LastChangedByUser">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/InProcessByUser">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.DraftAdministrativeData/DraftIsProcessedByMe">
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.LayerTypes/ID">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.LayerTypes/Name">
+                <Annotation Term="Common.Label" String="Name"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.LayerTypes_texts/Name">
+                <Annotation Term="Common.Label" String="Layer Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers">
+                <Annotation Term="Common.Label" String="Layer"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup"/>
+                            <PropertyValue Property="Label" String="General Information"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ServiceType_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LayerType_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MinZoom"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="ServiceUrl"/>
+                                    <PropertyValue Property="Url" Path="ServiceUrl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="OdataFieldNameGeometry"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="OdataFieldNameProperties"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LayoutJson"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="PaintJson"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MarkerUrl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MarkerFallback"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="JsonConfig"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Layer"/>
+                        <PropertyValue Property="TypeNamePlural" String="Layers"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LayerType_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ServiceType_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MinZoom"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                        <PropertyPath>LayerType_ID</PropertyPath>
+                        <PropertyPath>ServiceType_ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.EntityContainer/Layers">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="SapNetworkGeoConfig.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="SapNetworkGeoConfig.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="SapNetworkGeoConfig.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/ServiceType">
+                <Annotation Term="Common.Label" String="Service Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/ServiceUrl">
+                <Annotation Term="Common.Label" String="Service URL"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/OdataFieldNameGeometry">
+                <Annotation Term="Common.Label" String="OData Field Name Geometry"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/OdataFieldNameProperties">
+                <Annotation Term="Common.Label" String="OData Field Name Properties"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/LayerType">
+                <Annotation Term="Common.Label" String="Layer Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/MinZoom">
+                <Annotation Term="Common.Label" String="Min Zoom"/>
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/LayoutJson">
+                <Annotation Term="Common.Label" String="Layout JSON"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/PaintJson">
+                <Annotation Term="Common.Label" String="Paint JSON"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/MarkerUrl">
+                <Annotation Term="Common.Label" String="Marker URL"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/MarkerFallback">
+                <Annotation Term="Common.Label" String="Marker Fallback"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/JsonConfig">
+                <Annotation Term="Common.Label" String="JSON Config"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/ServiceType_ID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Service Type"/>
+                <Annotation Term="Common.Text" Path="ServiceType/Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="ServiceTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceType_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/LayerType_ID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Layer Type"/>
+                <Annotation Term="Common.Text" Path="LayerType/Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="LayerTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="LayerType_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers_texts/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers">
+                <Annotation Term="Common.Label" String="Renderer"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="License"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LicenseToken"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CloudFoundryDestination"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="Url"/>
+                                    <PropertyValue Property="Url" Path="Url"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultCenterLatitude"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultCenterLongitude"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultZoomLevel"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="JsonString"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="JsonConfig"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Renderer"/>
+                        <PropertyValue Property="TypeNamePlural" String="Renderers"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="License"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LicenseToken"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CloudFoundryDestination"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                        <PropertyPath>CloudFoundryDestination</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/Name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/License">
+                <Annotation Term="Common.Label" String="License"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/LicenseToken">
+                <Annotation Term="Common.Label" String="License Token"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/CloudFoundryDestination">
+                <Annotation Term="Common.Label" String="Cloud Foundry Destination"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/Url">
+                <Annotation Term="Common.Label" String="Service URL"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/DefaultCenterLatitude">
+                <Annotation Term="Common.Label" String="Default Center Latitude"/>
+                <Annotation Term="Validation.Maximum" Int="180"/>
+                <Annotation Term="Validation.Minimum" Int="-180"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/DefaultCenterLongitude">
+                <Annotation Term="Common.Label" String="Default Center Longitude"/>
+                <Annotation Term="Validation.Maximum" Int="180"/>
+                <Annotation Term="Validation.Minimum" Int="-180"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/DefaultZoomLevel">
+                <Annotation Term="Common.Label" String="Default Zoom Level"/>
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/JsonString">
+                <Annotation Term="Common.Label" String="JSON String"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/JsonConfig">
+                <Annotation Term="Common.Label" String="JSON Config"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.ServiceTypes/ID">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.ServiceTypes/Name">
+                <Annotation Term="Common.Label" String="Name"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.ServiceTypes_texts/Name">
+                <Annotation Term="Common.Label" String="Service Type"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
