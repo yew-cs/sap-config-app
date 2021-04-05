@@ -9,7 +9,7 @@
 |**Service Type**<br>OData Url|
 |**Service URL**<br>http://localhost:4004/netgeoconfig/
 |**Module Name**<br>layers|
-|**Application Title**<br>Layer Configuration |
+|**Application Title**<br>Layers Configuration |
 |**Namespace**<br>com.sap.nss.nsaa|
 |**UI5 Theme**<br>sap_fiori_3|
 |**UI5 Version**<br>Latest|
@@ -19,7 +19,7 @@
 
 ## layers
 
-NSAA Layer Configuration App
+NSAA Layers Configuration App
 
 ### Starting the generated app
 

@@ -1,0 +1,58 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = mapconfig
+## language=nodejs; multiTenant=false
+## approuter=
+_schema-version: "3.1"
+ID: sap.nss.nsaa
+version: 1.0.0
+description: "Network Spatial Administration Apps Component"
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
+
+modules:
+  # --------------------- SERVER MODULE ------------------------
+  - name: sap-nss-nsaa-srv
+    # ------------------------------------------------------------
+    type: nodejs
+    path: gen/srv
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      memory: 512M
+      disk-quota: 512M
+    requires:
+      - name: sap-nss-nsaa-hdi-container
+
+  # -------------------- SIDECAR MODULE ------------------------
+  - name: sap-nss-nsaa-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      memory: 128M
+      disk-quota: 128M
+      buildpack: nodejs_buildpack
+    requires:
+      # 'hana' and 'xsuaa' resources extracted from CAP configuration
+      - name: sap-nss-nsaa-hdi-container
+
+resources:
+  # ---------------------------------------------------------------------
+  # services extracted from CAP configuration
+  # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+  # ---------------------------------------------------------------------
+  - name: sap-nss-nsaa-hdi-container
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana # or 'hanatrial' on trial landscapes
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
