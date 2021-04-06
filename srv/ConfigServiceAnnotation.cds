@@ -221,50 +221,50 @@ annotate configService.Renderers with @(
     );
 }
 
-/**
- * Annotations for Business Object Types Entity
- */
-annotate configService.BusinessObjectTypes with @(
-    Common : {Label : '{i18n>BusinessObjectType}'},
-    UI     : {
-        SelectionFields                : [Name],
-        HeaderInfo                     : {
-            TypeName       : '{i18n>businessObjectType}',
-            TypeNamePlural : '{i18n>businessObjectTypes}',
-            Title          : {Value : Name},
-            Description    : {Value : Description},
+// /**
+//  * Annotations for Business Object Types Entity
+//  */
+// annotate configService.BusinessObjectTypes with @(
+//     Common : {Label : '{i18n>BusinessObjectType}'},
+//     UI     : {
+//         SelectionFields                : [Name],
+//         HeaderInfo                     : {
+//             TypeName       : '{i18n>businessObjectType}',
+//             TypeNamePlural : '{i18n>businessObjectTypes}',
+//             Title          : {Value : Name},
+//             Description    : {Value : Description},
 
-        },
-        LineItem                       : {$value : [
-        {Value : Name},
-        {Value : Description}
-        ]},
-        HeaderFacets                   : [],
-        Facets                         : [{
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.FieldGroup#GeneralInformation',
-        }],
-        FieldGroup #GeneralInformation : {Data : []}
-    }
-) {
-    ID          @(
-        title  : '{i18n>Id}',
-        UI     : {Hidden : true},
-        Common : {Text : {
-            $value                 : Name,
-            ![@UI.TextArrangement] : #TextOnly
-        }}
-    );
-    Name        @(
-        title : '{i18n>BusinessObjectType}',
-        UI    : {HiddenFilter : true}
-    );
-    Description @title : '{i18n>Description}';
-    JsonConfig  @(
-        title : '{i18n>jsonConfig}',
-        UI    : {MultiLineText : true}
-    );
-}
+//         },
+//         LineItem                       : {$value : [
+//         {Value : Name},
+//         {Value : Description}
+//         ]},
+//         HeaderFacets                   : [],
+//         Facets                         : [{
+//             $Type  : 'UI.ReferenceFacet',
+//             Target : '@UI.FieldGroup#GeneralInformation',
+//         }],
+//         FieldGroup #GeneralInformation : {Data : []}
+//     }
+// ) {
+//     ID          @(
+//         title  : '{i18n>Id}',
+//         UI     : {Hidden : true},
+//         Common : {Text : {
+//             $value                 : Name,
+//             ![@UI.TextArrangement] : #TextOnly
+//         }}
+//     );
+//     Name        @(
+//         title : '{i18n>BusinessObjectType}',
+//         UI    : {HiddenFilter : true}
+//     );
+//     Description @title : '{i18n>Description}';
+//     JsonConfig  @(
+//         title : '{i18n>jsonConfig}',
+//         UI    : {MultiLineText : true}
+//     );
+// }
 
 /**
  * Annotations for Actions Entity
@@ -274,8 +274,8 @@ annotate configService.Actions with @(
     UI     : {
         SelectionFields                : [
         Name,
-        ActionType_Code,
-        BusinessObjectType_ID
+        ActionType_Id,
+        BusinessObjectType_Id
         ],
         HeaderInfo                     : {
             TypeName       : '{i18n>Action}',
@@ -289,7 +289,7 @@ annotate configService.Actions with @(
         {Value : Name},
         {Value : Description},
         {Value : ActionType.name},
-        {Value : BusinessObjectType.Name},
+        {Value : BusinessObjectType.name},
         {Value : SemanticObject}
 
         ]},
@@ -299,8 +299,8 @@ annotate configService.Actions with @(
             Label  : '{i18n>GeneralInformation}'
         }],
         FieldGroup #GeneralInformation : {Data : [
-        {Value : ActionType_Code},
-        {Value : BusinessObjectType_ID},
+        {Value : ActionType_Id},
+        {Value : BusinessObjectType_Id},
         {Value : SemanticObject},
         {Value : Action},
         {
@@ -324,28 +324,12 @@ annotate configService.Actions with @(
             ValueListWithFixedValues
         }
     );
-    BusinessObjectType @(
-        title  : '{i18n>BusinessObjectType}',
+    BusinessObjectType  @(
+        title  : '{i18n>businessObjectType}',
         Common : {
-            Text                     : {
-                $value                 : BusinessObjectType.Name,
-                ![@UI.TextArrangement] : #TextOnly
-            },
-            ValueListWithFixedValues : true,
-            ValueList                : {
-                CollectionPath : 'BusinessObjectTypes',
-                Parameters     : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : BusinessObjectType_ID,
-                    ValueListProperty : 'ID'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'Name'
-                }
-                ]
-            }
+            Text            : BusinessObjectType.name,
+            TextArrangement : #TextOnly,
+            ValueListWithFixedValues
         }
     );
     Parameters         @(
@@ -361,7 +345,7 @@ annotate configService.Actions with @(
  * Annotations for ActionType Entity
  */
 annotate configService.ActionTypes with {
-    Code @(
+    Id @(
         title  : '{i18n>Id}',
         UI     : {Hidden : true},
         Common : {Text : {
@@ -371,6 +355,24 @@ annotate configService.ActionTypes with {
     );
     Name @(
         title : '{i18n>ActionType}',
+        UI    : {HiddenFilter : true}
+    );
+};
+
+/**
+ * Annotations for ActionType Entity
+ */
+annotate configService.BusinessObjectTypes with {
+    Id @(
+        title  : '{i18n>Id}',
+        UI     : {Hidden : true},
+        Common : {Text : {
+            $value                 : name,
+            ![@UI.TextArrangement] : #TextOnly
+        }}
+    );
+    Name @(
+        title : '{i18n>BusinessObjectType}',
         UI    : {HiddenFilter : true}
     );
 };
