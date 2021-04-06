@@ -102,10 +102,10 @@ module.exports = function() {
 
         let filterClientId = req.data.clientId;
 
-        let myActions = await db.read(Actions).where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
-        let myLayers = await db.read(Layers).where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
-        let myRenderers = await db.read(Renderers).where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
-        let myBusinessObjectTypes = await db.read(BusinessObjectTypes).where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
+        let myActions = await db.read(Actions); //.where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
+        let myLayers = await db.read(Layers); //.where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
+        let myRenderers = await db.read(Renderers); //.where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
+        let myBusinessObjectTypes = await db.read(BusinessObjectTypes); //.where([{ ref: ["clientId"] }, "=", { val: filterClientId }]);
 
         myReturnConfig['ClientId'] = filterClientId;
         myReturnConfig['actions'] = formatContent(myActions, Actions);
