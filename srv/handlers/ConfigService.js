@@ -93,7 +93,7 @@ module.exports = function() {
 
     this.on('get', async(req, next) => {
         const db = await cds.connect.to('db')
-        const { Actions, Layers, BusinessObjectTypes, Renderers } = db.entities('sap.net.geo.config')
+        const { Actions, Layers, BusinessObjectTypes, Renderers } = db.entities('md')
 
         // Initialize return value with template
         let myReturnConfig = myConfigTemplate;
