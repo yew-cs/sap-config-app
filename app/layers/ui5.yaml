@@ -2,7 +2,10 @@ specVersion: '1.0'
 metadata:
   name: 'layers'
 type: application
-ui5Theme: sap_fiori_3
+resources:
+  configuration:
+    paths:
+      webapp: webapp
 server:
   customMiddleware:
   - name: fiori-tools-proxy
@@ -23,3 +26,11 @@ server:
     configuration:
      port: 35729
      path: webapp
+builder:
+  customTasks:
+    - name: "ui5-task-zipper"
+      afterTask: "uglify"
+      configuration:
+        archiveName: "uimodule"
+        additionalFiles:
+          - webapp/xs-app.json

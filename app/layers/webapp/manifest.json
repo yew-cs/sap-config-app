@@ -9,6 +9,20 @@
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
+        "crossNavigation": {
+			"inbounds": {
+				"intent1": {
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"semanticObject": "data1",
+					"action": "display",
+					"title": "{{appTitle}}",
+					"icon": "sap-icon://search"
+				}
+			}
+		}, 
         "dataSources": {
             "mainService": {
                 "uri": "/netgeoconfig/",
