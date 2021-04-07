@@ -65,7 +65,7 @@ modules:
   # -------------------- UI DEPLOYER MODULE ------------------------       
   - name: mapconfig_ui_deployer
     type: com.sap.application.content
-    path: deployer
+    path: deployer/
     requires:
      - name: mapconfig_html5_repo_host
        parameters:
@@ -73,10 +73,23 @@ modules:
     build-parameters:
      build-result: resources
      requires:
+       - name: layers
+         artifacts:
+           - dist/uimodule_layers.zip
+         target-path: resources/
        - name: actions
          artifacts:
-           - dist/uimodule.zip
+           - dist/uimodule_actions.zip
          target-path: resources/
+  - name: layers
+    type: html5
+    path: app/layers
+    build-parameters:
+     builder: custom
+     commands:
+       - npm install
+       - npm run build
+     supported-platforms: []
   - name: actions
     type: html5
     path: app/actions
@@ -85,7 +98,7 @@ modules:
      commands:
        - npm install
        - npm run build
-     supported-platforms: []
+     supported-platforms: []   
 
   - name: mapconfig_launchpad_deployer
     type: com.sap.portal.content
