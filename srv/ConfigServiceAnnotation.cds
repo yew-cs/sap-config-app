@@ -325,7 +325,7 @@ annotate configService.Actions with @(
         }
     );
     BusinessObjectType  @(
-        title  : '{i18n>businessObjectType}',
+        title  : '{i18n>BusinessObjectType}',
         Common : {
             Text            : BusinessObjectType.name,
             TextArrangement : #TextOnly,
