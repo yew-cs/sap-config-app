@@ -102,21 +102,22 @@ context md {
      * Action Types e.g. semanticNavigation, urlNavigation etc
      */
     entity ActionsCodeList : common.CodeList {
-        key Code : String(20);
+        key Id : String(20);
     }
 
     entity ActionTypes : ActionsCodeList {}
+    entity BusinessObjectTypes : ActionsCodeList {}
 
 
-    /**
-     * Business Object Type: I.e. Work order
-     */
-    entity BusinessObjectTypes : cuid, managed {
-        ClientId    : ClientIdType;
-        Name        : localized String;
-        Description : localized String;
-        JsonConfig  : LargeString;
-    };
+    // /**
+    //  * Business Object Type: I.e. Work order
+    //  */
+    // entity BusinessObjectTypes : cuid, managed {
+    //     ClientId    : ClientIdType;
+    //     Name        : localized String;
+    //     Description : localized String;
+    //     JsonConfig  : LargeString;
+    // };
 
     /**
      * Scenarios or variants
