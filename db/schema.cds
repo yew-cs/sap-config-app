@@ -20,18 +20,18 @@ context md {
         CloudFoundryDestination : String;
         Url                     : String;
         @assert.range : [
-            -180,
-            180
+        -180,
+        180
         ]
         DefaultCenterLatitude   : Double;
         @assert.range : [
-            -180,
-            180
+        -180,
+        180
         ]
         DefaultCenterLongitude  : Double;
         @assert.range : [
-            0,
-            100
+        0,
+        100
         ]
         DefaultZoomLevel        : Integer;
         DefaultStyle            : String;
@@ -56,8 +56,8 @@ context md {
         @mandatory
         LayerType                : Association to one LayerTypes;
         @assert.range : [
-            0,
-            100
+        0,
+        100
         ] MinZoom                : Integer default 100;
         LayoutJson               : LargeString;
         PaintJson                : LargeString;
@@ -105,7 +105,11 @@ context md {
     }
 
     entity ActionTypes : ActionsCodeList {}
-    entity BusinessObjectTypes : ActionsCodeList {}
+
+    entity BusinessObjectTypes : ActionsCodeList,managed {
+        ClientId    : ClientIdType;
+        JsonConfig  : LargeString;
+    }
 
 
     // /**

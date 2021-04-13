@@ -1,7 +1,7 @@
-ID,Name,Descr
-Shipment,Shipment,
-WorkOrder,WorkOrder,
-Notification,Notification,
-Equipment,Equipment,
-TruckLocation,TruckLocation,
-Global,Global,
+ID,Name,Descr,ClientId,JsonConfig
+Shipment,Shipment,,76785e66-3032-4a27-b53f-4373dd135ce0,
+WorkOrder,WorkOrder,,76785e66-3032-4a27-b53f-4373dd135ce0,
+Notification,Notification,,76785e66-3032-4a27-b53f-4373dd135ce0,
+Equipment,Equipment,,76785e66-3032-4a27-b53f-4373dd135ce0,
+TruckLocation,TruckLocation,,76785e66-3032-4a27-b53f-4373dd135ce0,
+Global,Global,,76785e66-3032-4a27-b53f-4373dd135ce0,
