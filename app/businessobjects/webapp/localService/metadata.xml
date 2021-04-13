@@ -1,0 +1,1269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="configService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="ActionTypes" EntityType="configService.ActionTypes">
+                    <NavigationPropertyBinding Path="texts" Target="ActionTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="ActionTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="ActionTypes_texts" EntityType="configService.ActionTypes_texts"/>
+                <EntitySet Name="Actions" EntityType="configService.Actions">
+                    <NavigationPropertyBinding Path="ActionType" Target="ActionTypes"/>
+                    <NavigationPropertyBinding Path="BusinessObjectType" Target="BusinessObjectTypes"/>
+                    <NavigationPropertyBinding Path="texts" Target="Actions_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Actions_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Actions"/>
+                </EntitySet>
+                <EntitySet Name="ActionsInScenarios" EntityType="configService.ActionsInScenarios">
+                    <NavigationPropertyBinding Path="Scenario" Target="Scenarios"/>
+                    <NavigationPropertyBinding Path="Action" Target="Actions"/>
+                </EntitySet>
+                <EntitySet Name="Actions_texts" EntityType="configService.Actions_texts"/>
+                <EntitySet Name="BusinessObjectTypes" EntityType="configService.BusinessObjectTypes">
+                    <NavigationPropertyBinding Path="texts" Target="BusinessObjectTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="BusinessObjectTypes_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="BusinessObjectTypes"/>
+                </EntitySet>
+                <EntitySet Name="BusinessObjectTypes_texts" EntityType="configService.BusinessObjectTypes_texts"/>
+                <EntitySet Name="BusinessObjectsInScenarios" EntityType="configService.BusinessObjectsInScenarios">
+                    <NavigationPropertyBinding Path="Scenario" Target="Scenarios"/>
+                    <NavigationPropertyBinding Path="BusinessObject" Target="BusinessObjectTypes"/>
+                </EntitySet>
+                <EntitySet Name="LayerTypes" EntityType="configService.LayerTypes">
+                    <NavigationPropertyBinding Path="texts" Target="LayerTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="LayerTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="LayerTypes_texts" EntityType="configService.LayerTypes_texts"/>
+                <EntitySet Name="Layers" EntityType="configService.Layers">
+                    <NavigationPropertyBinding Path="ServiceType" Target="ServiceTypes"/>
+                    <NavigationPropertyBinding Path="LayerType" Target="LayerTypes"/>
+                    <NavigationPropertyBinding Path="texts" Target="Layers_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Layers_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Layers"/>
+                </EntitySet>
+                <EntitySet Name="LayersInScenarios" EntityType="configService.LayersInScenarios">
+                    <NavigationPropertyBinding Path="Scenario" Target="Scenarios"/>
+                    <NavigationPropertyBinding Path="Layer" Target="Layers"/>
+                </EntitySet>
+                <EntitySet Name="Layers_texts" EntityType="configService.Layers_texts"/>
+                <EntitySet Name="Renderers" EntityType="configService.Renderers">
+                    <NavigationPropertyBinding Path="texts" Target="Renderers_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Renderers_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Renderers"/>
+                </EntitySet>
+                <EntitySet Name="Renderers_texts" EntityType="configService.Renderers_texts"/>
+                <EntitySet Name="Scenarios" EntityType="configService.Scenarios">
+                    <NavigationPropertyBinding Path="Renderer" Target="Renderers"/>
+                    <NavigationPropertyBinding Path="BusinessObjects" Target="BusinessObjectsInScenarios"/>
+                    <NavigationPropertyBinding Path="Layers" Target="LayersInScenarios"/>
+                    <NavigationPropertyBinding Path="Actions" Target="ActionsInScenarios"/>
+                    <NavigationPropertyBinding Path="texts" Target="Scenarios_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Scenarios_texts"/>
+                </EntitySet>
+                <EntitySet Name="Scenarios_texts" EntityType="configService.Scenarios_texts"/>
+                <EntitySet Name="ServiceTypes" EntityType="configService.ServiceTypes">
+                    <NavigationPropertyBinding Path="texts" Target="ServiceTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="ServiceTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="ServiceTypes_texts" EntityType="configService.ServiceTypes_texts"/>
+                <FunctionImport Name="get" Function="configService.get"/>
+            </EntityContainer>
+            <EntityType Name="ActionTypes">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Id" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.ActionTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.ActionTypes_texts">
+                    <ReferentialConstraint Property="Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ActionTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Id" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Actions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="ActionType" Type="configService.ActionTypes">
+                    <ReferentialConstraint Property="ActionType_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="BusinessObjectType" Type="configService.BusinessObjectTypes">
+                    <ReferentialConstraint Property="BusinessObjectType_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="SemanticObject" Type="Edm.String"/>
+                <Property Name="Action" Type="Edm.String"/>
+                <Property Name="Url" Type="Edm.String"/>
+                <Property Name="Parameters" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.Actions_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.Actions_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ActionType_Id" Type="Edm.String" MaxLength="20"/>
+                <Property Name="BusinessObjectType_Id" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="configService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="configService.Actions"/>
+            </EntityType>
+            <EntityType Name="ActionsInScenarios">
+                <NavigationProperty Name="Scenario" Type="configService.Scenarios" Partner="Actions">
+                    <ReferentialConstraint Property="Scenario_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Action" Type="configService.Actions">
+                    <ReferentialConstraint Property="Action_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Scenario_ID" Type="Edm.Guid"/>
+                <Property Name="Action_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Actions_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="BusinessObjectTypes">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Id" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.BusinessObjectTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.BusinessObjectTypes_texts">
+                    <ReferentialConstraint Property="Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="configService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="configService.BusinessObjectTypes"/>
+            </EntityType>
+            <EntityType Name="BusinessObjectTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Id" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="BusinessObjectsInScenarios">
+                <NavigationProperty Name="Scenario" Type="configService.Scenarios" Partner="BusinessObjects">
+                    <ReferentialConstraint Property="Scenario_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="BusinessObject" Type="configService.BusinessObjectTypes">
+                    <ReferentialConstraint Property="BusinessObject_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="Scenario_ID" Type="Edm.Guid"/>
+                <Property Name="BusinessObject_Id" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="LayerTypes">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.LayerTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.LayerTypes_texts">
+                    <ReferentialConstraint Property="Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="LayerTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Layers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="ServiceType" Type="configService.ServiceTypes">
+                    <ReferentialConstraint Property="ServiceType_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="ServiceUrl" Type="Edm.String"/>
+                <Property Name="OdataFieldNameGeometry" Type="Edm.String"/>
+                <Property Name="OdataFieldNameProperties" Type="Edm.String"/>
+                <NavigationProperty Name="LayerType" Type="configService.LayerTypes">
+                    <ReferentialConstraint Property="LayerType_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="MinZoom" Type="Edm.Int32"/>
+                <Property Name="LayoutJson" Type="Edm.String"/>
+                <Property Name="PaintJson" Type="Edm.String"/>
+                <Property Name="MarkerUrl" Type="Edm.String"/>
+                <Property Name="MarkerFallback" Type="Edm.String"/>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.Layers_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.Layers_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ServiceType_Code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="LayerType_Code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="configService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="configService.Layers"/>
+            </EntityType>
+            <EntityType Name="LayersInScenarios">
+                <NavigationProperty Name="Scenario" Type="configService.Scenarios" Partner="Layers">
+                    <ReferentialConstraint Property="Scenario_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Layer" Type="configService.Layers">
+                    <ReferentialConstraint Property="Layer_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Scenario_ID" Type="Edm.Guid"/>
+                <Property Name="Layer_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Layers_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Renderers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <Property Name="AccessToken" Type="Edm.String"/>
+                <Property Name="CloudFoundryDestination" Type="Edm.String"/>
+                <Property Name="Url" Type="Edm.String"/>
+                <Property Name="DefaultCenterLatitude" Type="Edm.Double"/>
+                <Property Name="DefaultCenterLongitude" Type="Edm.Double"/>
+                <Property Name="DefaultZoomLevel" Type="Edm.Int32"/>
+                <Property Name="DefaultStyle" Type="Edm.String"/>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.Renderers_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.Renderers_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="configService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="configService.Renderers"/>
+            </EntityType>
+            <EntityType Name="Renderers_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Scenarios">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ClientId" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <NavigationProperty Name="Renderer" Type="configService.Renderers">
+                    <ReferentialConstraint Property="Renderer_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="JsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="BusinessObjects" Type="Collection(configService.BusinessObjectsInScenarios)" Partner="Scenario">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Layers" Type="Collection(configService.LayersInScenarios)" Partner="Scenario">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="Actions" Type="Collection(configService.ActionsInScenarios)" Partner="Scenario">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="texts" Type="Collection(configService.Scenarios_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.Scenarios_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Renderer_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Scenarios_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ServiceTypes">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(configService.ServiceTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="configService.ServiceTypes_texts">
+                    <ReferentialConstraint Property="Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ServiceTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="Code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Actions"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="configService.Actions"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.BusinessObjectTypes"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="configService.BusinessObjectTypes"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Layers"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="configService.Layers"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Renderers"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="configService.Renderers"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Actions"/>
+                <ReturnType Type="configService.Actions"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.BusinessObjectTypes"/>
+                <ReturnType Type="configService.BusinessObjectTypes"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Layers"/>
+                <ReturnType Type="configService.Layers"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Renderers"/>
+                <ReturnType Type="configService.Renderers"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Actions"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="configService.Actions"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.BusinessObjectTypes"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="configService.BusinessObjectTypes"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Layers"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="configService.Layers"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="configService.Renderers"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="configService.Renderers"/>
+            </Action>
+            <Function Name="get" IsBound="false" IsComposable="false">
+                <Parameter Name="clientId" Type="Edm.String"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Annotations Target="configService.ActionTypes">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.ActionTypes/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.ActionTypes/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.ActionTypes/Id">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.ActionTypes_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.ActionTypes_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.Actions">
+                <Annotation Term="Common.Label" String="Action"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                            <PropertyValue Property="Label" String="General Information"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ActionType_Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="BusinessObjectType_Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="SemanticObject"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Action"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="Url"/>
+                                    <PropertyValue Property="Url" Path="Url"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Parameters"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Action"/>
+                        <PropertyValue Property="TypeNamePlural" String="Actions"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ActionType/name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BusinessObjectType/name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SemanticObject"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                        <PropertyPath>ActionType_Id</PropertyPath>
+                        <PropertyPath>BusinessObjectType_Id</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.EntityContainer/Actions">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="configService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="configService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="configService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Actions/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/ActionType">
+                <Annotation Term="Common.Label" String="Action Type"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/BusinessObjectType">
+                <Annotation Term="Common.Label" String="Business Object Type"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/SemanticObject">
+                <Annotation Term="Common.Label" String="Semantic Object"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/Action">
+                <Annotation Term="Common.Label" String="Action"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/Url">
+                <Annotation Term="Common.Label" String="URL"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/Parameters">
+                <Annotation Term="Common.Label" String="Parameters"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/ActionType_Id">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Action Type"/>
+                <Annotation Term="Common.Text" Path="ActionType/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Action Type"/>
+                        <PropertyValue Property="CollectionPath" String="ActionTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ActionType_Id"/>
+                                    <PropertyValue Property="ValueListProperty" String="Id"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Actions/BusinessObjectType_Id">
+                <Annotation Term="Common.Label" String="Business Object Type"/>
+                <Annotation Term="Common.Text" Path="BusinessObjectType/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Business Object Type"/>
+                        <PropertyValue Property="CollectionPath" String="BusinessObjectTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="BusinessObjectType_Id"/>
+                                    <PropertyValue Property="ValueListProperty" String="Id"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Actions/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Actions/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Actions_texts/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes">
+                <Annotation Term="Common.Label" String="Business Object Type"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="JsonConfig"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="descr"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="businessObjectType"/>
+                        <PropertyValue Property="TypeNamePlural" String="businessObjectTypes"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="descr"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>name</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.EntityContainer/BusinessObjectTypes">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="configService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="configService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="configService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/Id">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/JsonConfig">
+                <Annotation Term="Common.Label" String="jsonConfig"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectTypes_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.BusinessObjectsInScenarios/BusinessObject_Id">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Business Object Type"/>
+                        <PropertyValue Property="CollectionPath" String="BusinessObjectTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="BusinessObject_Id"/>
+                                    <PropertyValue Property="ValueListProperty" String="Id"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/DraftUUID">
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/CreationDateTime">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/CreatedByUser">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/DraftIsCreatedByMe">
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/LastChangeDateTime">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/LastChangedByUser">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/InProcessByUser">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="configService.DraftAdministrativeData/DraftIsProcessedByMe">
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.LayerTypes">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.LayerTypes/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.LayerTypes/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.LayerTypes/Code">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.LayerTypes_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.LayerTypes_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.Layers">
+                <Annotation Term="Common.Label" String="Layer"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="LayerOverview"/>
+                            <PropertyValue Property="ID" String="LayerOverviewFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="General Information"/>
+                                        <PropertyValue Property="ID" String="GeneralInformationFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="ConfigurationDetail"/>
+                                        <PropertyValue Property="ID" String="ConfigurationDetailFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#ConfigurationDetail"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ConfigurationDetail">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LayoutJson"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="PaintJson"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MarkerUrl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MarkerFallback"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="JsonConfig"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ServiceType_Code"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="ServiceUrl"/>
+                                    <PropertyValue Property="Url" Path="ServiceUrl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LayerType_Code"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MinZoom"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="OdataFieldNameGeometry"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="OdataFieldNameProperties"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Layer"/>
+                        <PropertyValue Property="TypeNamePlural" String="Layers"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LayerType_Code"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ServiceType_Code"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MinZoom"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                        <PropertyPath>LayerType_Code</PropertyPath>
+                        <PropertyPath>ServiceType_Code</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.EntityContainer/Layers">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="configService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="configService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="configService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Layers/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/ServiceType">
+                <Annotation Term="Common.Label" String="Service Type"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/ServiceUrl">
+                <Annotation Term="Common.Label" String="Service URL"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/OdataFieldNameGeometry">
+                <Annotation Term="Common.Label" String="OData Field Name Geometry"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/OdataFieldNameProperties">
+                <Annotation Term="Common.Label" String="OData Field Name Properties"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/LayerType">
+                <Annotation Term="Common.Label" String="Layer Type"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/MinZoom">
+                <Annotation Term="Common.Label" String="Min Zoom"/>
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/LayoutJson">
+                <Annotation Term="Common.Label" String="Layout JSON"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/PaintJson">
+                <Annotation Term="Common.Label" String="Paint JSON"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/MarkerUrl">
+                <Annotation Term="Common.Label" String="Marker URL"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/MarkerFallback">
+                <Annotation Term="Common.Label" String="Marker Fallback"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/JsonConfig">
+                <Annotation Term="Common.Label" String="JSON Config"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/ServiceType_Code">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Service Type"/>
+                <Annotation Term="Common.Text" Path="ServiceType/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Service Type"/>
+                        <PropertyValue Property="CollectionPath" String="ServiceTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceType_Code"/>
+                                    <PropertyValue Property="ValueListProperty" String="Code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Layers/LayerType_Code">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Layer Type"/>
+                <Annotation Term="Common.Text" Path="LayerType/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Layer Type"/>
+                        <PropertyValue Property="CollectionPath" String="LayerTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="LayerType_Code"/>
+                                    <PropertyValue Property="ValueListProperty" String="Code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Layers/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Layers_texts/Name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers">
+                <Annotation Term="Common.Label" String="Renderer"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="AccessToken"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CloudFoundryDestination"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="Url"/>
+                                    <PropertyValue Property="Url" Path="Url"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultCenterLatitude"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultCenterLongitude"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultZoomLevel"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DefaultStyle"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="JsonConfig"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Renderer"/>
+                        <PropertyValue Property="TypeNamePlural" String="Renderers"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AccessToken"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CloudFoundryDestination"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Name</PropertyPath>
+                        <PropertyPath>CloudFoundryDestination</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.EntityContainer/Renderers">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="configService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="configService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="configService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.Renderers/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/Name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/Description">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/AccessToken">
+                <Annotation Term="Common.Label" String="Access Token"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/CloudFoundryDestination">
+                <Annotation Term="Common.Label" String="Cloud Foundry Destination"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/Url">
+                <Annotation Term="Common.Label" String="Service URL"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/DefaultCenterLatitude">
+                <Annotation Term="Common.Label" String="Default Center Latitude"/>
+                <Annotation Term="Validation.Maximum" Int="180"/>
+                <Annotation Term="Validation.Minimum" Int="-180"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/DefaultCenterLongitude">
+                <Annotation Term="Common.Label" String="Default Center Longitude"/>
+                <Annotation Term="Validation.Maximum" Int="180"/>
+                <Annotation Term="Validation.Minimum" Int="-180"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/DefaultZoomLevel">
+                <Annotation Term="Common.Label" String="Default Zoom Level"/>
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/DefaultStyle">
+                <Annotation Term="Common.Label" String="Default Style"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/JsonConfig">
+                <Annotation Term="Common.Label" String="JSON Config"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.Renderers/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.ServiceTypes">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="configService.ServiceTypes/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.ServiceTypes/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="configService.ServiceTypes/Code">
+                <Annotation Term="Common.Label" String="Code"/>
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="configService.ServiceTypes_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="configService.ServiceTypes_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -9,6 +9,7 @@ service configService @(path : '/netgeoconfig') {
         modifiedBy
     };
 
+    @odata.draft.enabled
     entity BusinessObjectTypes        as projection on my.BusinessObjectTypes excluding {
         createdAt,
         createdBy,

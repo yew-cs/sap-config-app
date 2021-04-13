@@ -52,76 +52,89 @@ modules:
       disk-quota: 512M
       memory: 512M
     requires:
-     - name: mapconfig_uaa
-     - name: mapconfig_html5_repo_runtime
-     - name: mapconfig_portal
-     - name: srv-api
-       group: destinations
-       properties:
-         name: srv-api
-         url: "~{srv-url}"
-         forwardAuthToken: true  
+      - name: mapconfig_uaa
+      - name: mapconfig_html5_repo_runtime
+      - name: mapconfig_portal
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: "~{srv-url}"
+          forwardAuthToken: true
 
-  # -------------------- UI DEPLOYER MODULE ------------------------       
+  # -------------------- UI DEPLOYER MODULE ------------------------
   - name: mapconfig_ui_deployer
     type: com.sap.application.content
     path: deployer/
     requires:
-     - name: mapconfig_html5_repo_host
-       parameters:
-         content-target: true
+      - name: mapconfig_html5_repo_host
+        parameters:
+          content-target: true
     build-parameters:
-     build-result: resources
-     requires:
-       - name: layers
-         artifacts:
-           - dist/uimodule_layers.zip
-         target-path: resources/
-       - name: actions
-         artifacts:
-           - dist/uimodule_actions.zip
-         target-path: resources/
-       - name: renderers
-         artifacts:
-           - dist/uimodule_renderers.zip
-         target-path: resources/
+      build-result: resources
+      requires:
+        - name: layers
+          artifacts:
+            - dist/uimodule_layers.zip
+          target-path: resources/
+        - name: actions
+          artifacts:
+            - dist/uimodule_actions.zip
+          target-path: resources/
+        - name: renderers
+          artifacts:
+            - dist/uimodule_renderers.zip
+          target-path: resources/
+        - name: businessobjects
+          artifacts:
+            - dist/uimodule_businessobjects.zip
+          target-path: resources/
   - name: layers
     type: html5
     path: app/layers
     build-parameters:
-     builder: custom
-     commands:
-       - npm install
-       - npm run build
-     supported-platforms: []
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
   - name: actions
     type: html5
     path: app/actions
     build-parameters:
-     builder: custom
-     commands:
-       - npm install
-       - npm run build
-     supported-platforms: []
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
   - name: renderers
     type: html5
     path: app/renderers
     build-parameters:
-     builder: custom
-     commands:
-       - npm install
-       - npm run build
-     supported-platforms: []   
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+  - name: businessobjects
+    type: html5
+    path: app/businessobjects
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
 
   - name: mapconfig_launchpad_deployer
     type: com.sap.portal.content
     path: launchpad
     deployed-after:
-     - mapconfig_ui_deployer
+      - mapconfig_ui_deployer
     requires:
-     - name: mapconfig_portal
-     - name: mapconfig_html5_repo_host
-     - name: mapconfig_uaa
+      - name: mapconfig_portal
+      - name: mapconfig_html5_repo_host
+      - name: mapconfig_uaa
 
 resources:
   # ---------------------------------------------------------------------
@@ -152,7 +165,7 @@ resources:
       service-plan: app-host
       service: html5-apps-repo
       config:
-       sizeLimit: 1
+        sizeLimit: 1
   - name: mapconfig_portal
     type: org.cloudfoundry.managed-service
     parameters:
