@@ -16,8 +16,7 @@ context md {
         ClientId                : ClientIdType;
         Name                    : localized String;
         Description             : localized String;
-        License                 : String;
-        LicenseToken            : String;
+        AccessToken             : String;
         CloudFoundryDestination : String;
         Url                     : String;
         @assert.range : [
@@ -35,7 +34,7 @@ context md {
             100
         ]
         DefaultZoomLevel        : Integer;
-        JsonString              : String;
+        DefaultStyle            : String;
         JsonConfig              : LargeString;
     };
 
