@@ -227,8 +227,8 @@ annotate configService.BusinessObjectTypes with @(
     UI     : {
         SelectionFields                : [Name],
         HeaderInfo                     : {
-            TypeName       : '{i18n>businessObjectType}',
-            TypeNamePlural : '{i18n>businessObjectTypes}',
+            TypeName       : '{i18n>BusinessObjectType}',
+            TypeNamePlural : '{i18n>BusinessObjectTypes}',
             Title          : {Value : Name},
             Description    : {Value : Description},
 
@@ -242,21 +242,11 @@ annotate configService.BusinessObjectTypes with @(
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.FieldGroup#GeneralInformation',
         }],
-        FieldGroup #GeneralInformation : {Data : []}
+        FieldGroup #GeneralInformation : {Data : [{Value : JsonConfig}]}
     }
 ) {
-    ID          @(
-        title  : '{i18n>Id}',
-        UI     : {Hidden : true},
-        Common : {Text : {
-            $value                 : Name,
-            ![@UI.TextArrangement] : #TextOnly
-        }}
-    );
-    Name        @(
-        title : '{i18n>BusinessObjectType}',
-        UI    : {HiddenFilter : true}
-    );
+    ID          @Core  : {Computed : true};
+    Name        @(title : '{i18n>Name}', );
     Description @title : '{i18n>Description}';
     JsonConfig  @(
         title : '{i18n>jsonConfig}',
@@ -359,7 +349,7 @@ annotate configService.Actions with @(
  * Annotations for ActionType Entity
  */
 annotate configService.ActionTypes with {
-    Code   @(
+    Code @(
         title  : '{i18n>Id}',
         UI     : {Hidden : true},
         Common : {Text : {
@@ -372,4 +362,3 @@ annotate configService.ActionTypes with {
         UI    : {HiddenFilter : true}
     );
 };
-

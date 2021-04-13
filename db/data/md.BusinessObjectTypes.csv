@@ -1,4 +1,4 @@
-ID,clientId,name,description
+ID,clientId,Name,Description
 dc34c712-a906-4347-b23b-a88fea1fab8a,76785e66-3032-4a27-b53f-4373dd135ce0,Shipment,LBN Shipment
 eaf815c8-eddf-421b-9e99-9b289629ec6f,76785e66-3032-4a27-b53f-4373dd135ce0,Work Order,AIN Work Order
 cfa87170-0932-4e49-a355-e42a6339d8ce,76785e66-3032-4a27-b53f-4373dd135ce0,Notification,S4 Notification
