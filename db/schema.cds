@@ -14,6 +14,7 @@ context md {
      */
     entity Renderers : cuid, managed {
         ClientId                : ClientIdType;
+        @mandatory
         Name                    : localized String;
         Description             : localized String;
         AccessToken             : String;
@@ -111,6 +112,7 @@ context md {
      */
     entity BusinessObjectTypes : cuid, managed {
         ClientId    : ClientIdType;
+        @mandatory
         Name        : localized String;
         Description : localized String;
         JsonConfig  : LargeString;

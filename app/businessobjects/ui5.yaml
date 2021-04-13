@@ -26,7 +26,7 @@ server:
     configuration:
      port: 35729
      path: webapp
-     builder:
+builder:
   customTasks:
     - name: "ui5-task-zipper"
       afterTask: "uglify"

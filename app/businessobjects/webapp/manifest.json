@@ -9,6 +9,20 @@
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "data3",
+                    "action": "display",
+                    "title": "{{appTitle}}",
+                    "icon": "sap-icon://search"
+                }
+            }
+        },
         "dataSources": {
             "mainService": {
                 "uri": "/netgeoconfig/",
@@ -81,8 +95,7 @@
             }
         },
         "routing": {
-            "routes": [
-                {
+            "routes": [{
                     "pattern": ":?query:",
                     "name": "BusinessObjectTypesList",
                     "target": "BusinessObjectTypesList"
