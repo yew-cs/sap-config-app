@@ -7,9 +7,9 @@ annotate configService.Layers with @(
     Common : {Label : '{i18n>Layer}'},
     UI     : {
         SelectionFields                 : [
-        Name,
-        LayerType_Code,
-        ServiceType_Code
+            Name,
+            LayerType_Code,
+            ServiceType_Code
         ],
         HeaderInfo                      : {
             TypeName       : '{i18n>Layer}',
@@ -20,31 +20,31 @@ annotate configService.Layers with @(
         },
         HeaderFacets                    : [],
         LineItem                        : {$value : [
-        {Value : Name},
-        {Value : LayerType_Code},
-        {Value : ServiceType_Code},
-        {Value : MinZoom}
+            {Value : Name},
+            {Value : LayerType_Code},
+            {Value : ServiceType_Code},
+            {Value : MinZoom}
         ]},
         FieldGroup #GeneralInformation  : {Data : [
 
-        {Value : ServiceType_Code},
-        {
-            $Type : 'UI.DataFieldWithUrl',
-            Value : ServiceUrl,
-            Url   : ServiceUrl
-        },
-        {Value : LayerType_Code},
-        {Value : MinZoom},
-        {Value : OdataFieldNameGeometry},
-        {Value : OdataFieldNameProperties},
+            {Value : ServiceType_Code},
+            {
+                $Type : 'UI.DataFieldWithUrl',
+                Value : ServiceUrl,
+                Url   : ServiceUrl
+            },
+            {Value : LayerType_Code},
+            {Value : MinZoom},
+            {Value : OdataFieldNameGeometry},
+            {Value : OdataFieldNameProperties},
         ]},
         FieldGroup #ConfigurationDetail : {Data : [
 
-        {Value : LayoutJson},
-        {Value : PaintJson},
-        {Value : MarkerUrl},
-        {Value : MarkerFallback},
-        {Value : JsonConfig},
+            {Value : LayoutJson},
+            {Value : PaintJson},
+            {Value : MarkerUrl},
+            {Value : MarkerFallback},
+            {Value : JsonConfig},
 
         ]},
         Facets                          : [{
@@ -163,8 +163,8 @@ annotate configService.Renderers with @(
     Common : {Label : '{i18n>Renderer}'},
     UI     : {
         SelectionFields                : [
-        Name,
-        CloudFoundryDestination
+            Name,
+            CloudFoundryDestination
         ],
         HeaderInfo                     : {
             TypeName       : '{i18n>Renderer}',
@@ -174,10 +174,10 @@ annotate configService.Renderers with @(
 
         },
         LineItem                       : {$value : [
-        {Value : Name},
-        {Value : Description},
-        {Value : AccessToken},
-        {Value : CloudFoundryDestination}
+            {Value : Name},
+            {Value : Description},
+            {Value : AccessToken},
+            {Value : CloudFoundryDestination}
         ]},
         Facets                         : [{
             $Type  : 'UI.ReferenceFacet',
@@ -185,18 +185,18 @@ annotate configService.Renderers with @(
         }],
         FieldGroup #GeneralInformation : {Data : [
 
-        {Value : AccessToken},
-        {Value : CloudFoundryDestination},
-        {
-            $Type : 'UI.DataFieldWithUrl',
-            Value : Url,
-            Url   : Url
-        },
-        {Value : DefaultCenterLatitude},
-        {Value : DefaultCenterLongitude},
-        {Value : DefaultZoomLevel},
-        {Value : DefaultStyle},
-        {Value : JsonConfig}
+            {Value : AccessToken},
+            {Value : CloudFoundryDestination},
+            {
+                $Type : 'UI.DataFieldWithUrl',
+                Value : Url,
+                Url   : Url
+            },
+            {Value : DefaultCenterLatitude},
+            {Value : DefaultCenterLongitude},
+            {Value : DefaultZoomLevel},
+            {Value : DefaultStyle},
+            {Value : JsonConfig}
         ]}
     }
 ) {
@@ -219,50 +219,50 @@ annotate configService.Renderers with @(
     );
 }
 
-// /**
-//  * Annotations for Business Object Types Entity
-//  */
-// annotate configService.BusinessObjectTypes with @(
-//     Common : {Label : '{i18n>BusinessObjectType}'},
-//     UI     : {
-//         SelectionFields                : [Name],
-//         HeaderInfo                     : {
-//             TypeName       : '{i18n>businessObjectType}',
-//             TypeNamePlural : '{i18n>businessObjectTypes}',
-//             Title          : {Value : Name},
-//             Description    : {Value : Description},
+/**
+ * Annotations for Business Object Types Entity
+ */
+annotate configService.BusinessObjectTypes with @(
+    Common : {Label : '{i18n>BusinessObjectType}'},
+    UI     : {
+        SelectionFields                : [Name],
+        HeaderInfo                     : {
+            TypeName       : '{i18n>businessObjectType}',
+            TypeNamePlural : '{i18n>businessObjectTypes}',
+            Title          : {Value : Name},
+            Description    : {Value : Description},
 
-//         },
-//         LineItem                       : {$value : [
-//         {Value : Name},
-//         {Value : Description}
-//         ]},
-//         HeaderFacets                   : [],
-//         Facets                         : [{
-//             $Type  : 'UI.ReferenceFacet',
-//             Target : '@UI.FieldGroup#GeneralInformation',
-//         }],
-//         FieldGroup #GeneralInformation : {Data : []}
-//     }
-// ) {
-//     ID          @(
-//         title  : '{i18n>Id}',
-//         UI     : {Hidden : true},
-//         Common : {Text : {
-//             $value                 : Name,
-//             ![@UI.TextArrangement] : #TextOnly
-//         }}
-//     );
-//     Name        @(
-//         title : '{i18n>BusinessObjectType}',
-//         UI    : {HiddenFilter : true}
-//     );
-//     Description @title : '{i18n>Description}';
-//     JsonConfig  @(
-//         title : '{i18n>jsonConfig}',
-//         UI    : {MultiLineText : true}
-//     );
-// }
+        },
+        LineItem                       : {$value : [
+            {Value : Name},
+            {Value : Description}
+        ]},
+        HeaderFacets                   : [],
+        Facets                         : [{
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.FieldGroup#GeneralInformation',
+        }],
+        FieldGroup #GeneralInformation : {Data : []}
+    }
+) {
+    ID          @(
+        title  : '{i18n>Id}',
+        UI     : {Hidden : true},
+        Common : {Text : {
+            $value                 : Name,
+            ![@UI.TextArrangement] : #TextOnly
+        }}
+    );
+    Name        @(
+        title : '{i18n>BusinessObjectType}',
+        UI    : {HiddenFilter : true}
+    );
+    Description @title : '{i18n>Description}';
+    JsonConfig  @(
+        title : '{i18n>jsonConfig}',
+        UI    : {MultiLineText : true}
+    );
+}
 
 /**
  * Annotations for Actions Entity
@@ -271,9 +271,9 @@ annotate configService.Actions with @(
     Common : {Label : '{i18n>Action}'},
     UI     : {
         SelectionFields                : [
-        Name,
-        ActionType_Id,
-        BusinessObjectType_Id
+            Name,
+            ActionType_Code,
+            BusinessObjectType_ID
         ],
         HeaderInfo                     : {
             TypeName       : '{i18n>Action}',
@@ -284,11 +284,11 @@ annotate configService.Actions with @(
         },
         HeaderFacets                   : [],
         LineItem                       : {$value : [
-        {Value : Name},
-        {Value : Description},
-        {Value : ActionType.name},
-        {Value : BusinessObjectType.name},
-        {Value : SemanticObject}
+            {Value : Name},
+            {Value : Description},
+            {Value : ActionType.name},
+            {Value : BusinessObjectType.Name},
+            {Value : SemanticObject}
 
         ]},
         Facets                         : [{
@@ -297,16 +297,16 @@ annotate configService.Actions with @(
             Label  : '{i18n>GeneralInformation}'
         }],
         FieldGroup #GeneralInformation : {Data : [
-        {Value : ActionType_Id},
-        {Value : BusinessObjectType_Id},
-        {Value : SemanticObject},
-        {Value : Action},
-        {
-            $Type : 'UI.DataFieldWithUrl',
-            Value : Url,
-            Url   : Url
-        },
-        {Value : Parameters},
+            {Value : ActionType_Code},
+            {Value : BusinessObjectType_ID},
+            {Value : SemanticObject},
+            {Value : Action},
+            {
+                $Type : 'UI.DataFieldWithUrl',
+                Value : Url,
+                Url   : Url
+            },
+            {Value : Parameters},
 
         ]}
     }
@@ -325,9 +325,25 @@ annotate configService.Actions with @(
     BusinessObjectType @(
         title  : '{i18n>BusinessObjectType}',
         Common : {
-            Text            : BusinessObjectType.name,
-            TextArrangement : #TextOnly,
-            ValueListWithFixedValues
+            Text                     : {
+                $value                 : BusinessObjectType.Name,
+                ![@UI.TextArrangement] : #TextOnly
+            },
+            ValueListWithFixedValues : true,
+            ValueList                : {
+                CollectionPath : 'BusinessObjectTypes',
+                Parameters     : [
+                    {
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : BusinessObjectType_ID,
+                        ValueListProperty : 'ID'
+                    },
+                    {
+                        $Type             : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty : 'Name'
+                    }
+                ]
+            }
         }
     );
     Parameters         @(
@@ -343,7 +359,7 @@ annotate configService.Actions with @(
  * Annotations for ActionType Entity
  */
 annotate configService.ActionTypes with {
-    Id   @(
+    Code   @(
         title  : '{i18n>Id}',
         UI     : {Hidden : true},
         Common : {Text : {
@@ -357,20 +373,3 @@ annotate configService.ActionTypes with {
     );
 };
 
-/**
- * Annotations for ActionType Entity
- */
-annotate configService.BusinessObjectTypes with {
-    Id   @(
-        title  : '{i18n>Id}',
-        UI     : {Hidden : true},
-        Common : {Text : {
-            $value                 : name,
-            ![@UI.TextArrangement] : #TextOnly
-        }}
-    );
-    Name @(
-        title : '{i18n>businessObjectType}',
-        UI    : {HiddenFilter : true}
-    );
-};
