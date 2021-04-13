@@ -81,6 +81,10 @@ modules:
          artifacts:
            - dist/uimodule_actions.zip
          target-path: resources/
+       - name: renderers
+         artifacts:
+           - dist/uimodule_renderers.zip
+         target-path: resources/
   - name: layers
     type: html5
     path: app/layers
@@ -93,6 +97,15 @@ modules:
   - name: actions
     type: html5
     path: app/actions
+    build-parameters:
+     builder: custom
+     commands:
+       - npm install
+       - npm run build
+     supported-platforms: []
+  - name: renderers
+    type: html5
+    path: app/renderers
     build-parameters:
      builder: custom
      commands:

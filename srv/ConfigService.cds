@@ -24,6 +24,7 @@ service configService @(path : '/netgeoconfig') {
         modifiedBy
     };
 
+    @odata.draft.enabled
     entity Renderers                  as projection on my.Renderers excluding {
         createdAt,
         createdBy,
